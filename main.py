@@ -53,6 +53,44 @@ def has_symbols(user_pass:str)-> bool:
     result = any(char in user_pass for char in symbols_list)
     return result
 
+# ----------------------------------------------------------------------------------------------------------------------
+# AI GENERATED CODE
+
+# Determine Password Strength Based On Length And Character Types
+def password_strength(user_pass: str) -> str:
+
+    # Get Password Length
+    pass_len = len_of_password(user_pass)
+
+    # Count How Many Different Character Types The Password Contains
+    char_types = 0
+
+    if has_uppercase(user_pass):
+        char_types += 1
+
+    if has_lowercase(user_pass):
+        char_types += 1
+
+    if has_numbers(user_pass):
+        char_types += 1
+
+    if has_symbols(user_pass):
+        char_types += 1
+
+    # Determine Password Strength
+    if pass_len >= 12 and char_types >= 3:
+        return "STRONG"
+
+    elif pass_len >= 8 and char_types >= 2:
+        return "MODERATE"
+
+    else:
+        return "WEAK"
+
+# AI GENERATED CODE ENDS HERE
+# ----------------------------------------------------------------------------------------------------------------------
+
+
 # Function That Contains The Code To Check The Password
 def check_password(user_pass: str)-> str:
     # Calls Functions To Get Lenght And Check Characters For Type
@@ -94,25 +132,31 @@ def check_password(user_pass: str)-> str:
     
 # Main Function That Controls The Program
 def main()-> None:
-
+    print("\nHow Long Will It Take For Modern Hardware To Crack Your Password In 2026?")
     keep_running = True
     
     while keep_running:
-        print("\nHow Long Will It Take For Modern Hardware To Crack Your Password In 2026?")
+        
         
         # Get User Password
-        user_pass = input("Enter Password To Check: ")
+        user_pass = input("\nEnter Password To Check: ")
 
         # Call The Check Password Function And Store The Output
         time_to_crack = check_password(user_pass=user_pass)
 
+        # Call The Password Strength Function
+        strength = password_strength(user_pass=user_pass)
+
+        print("-----------------------------------------------------------------------------------")
         # Print The Length Of Password And Output (Time To Crack The Password)
         print(f"\nYour Password Is {len(user_pass)} Characters Long")
         print(f"The Time It Will Take To Crack Your Password In 2026 is: {time_to_crack}")
+        print(f"Your Password Strength Is: {strength}")
+        print("-----------------------------------------------------------------------------------")
 
         cont = input("\nWould You Like To Check Another Password?(Y/N): ")
 
-        if cont == "N" or cont =="n" or cont == "No" or cont =="NO" or cont =="no":
+        if cont.strip().lower() not in ["y", "yes"]:
             keep_running = False
     
     print("\nThank You For Using This Program\n")
